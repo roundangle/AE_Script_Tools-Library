@@ -20,10 +20,28 @@
     // multiPropWriteRobust
 
 //  MultiUse Public Functions
+    //  sepPosSafety
+    //  prop_conflictsCategory
+    //  lyr_propCategories
+    //  testConflicts
 
 //  PropInfo Public Functions
+    //  readPropIndexTreeAry
+    //  readPropNameTreeAry
+    //  readPropMatchNameTreeAry
+    //  readLyrFromProp
+    //  readPropIndexTreeObj
+    //  applyPropTreeAryToLyr
+    //  buildLyrProps
 
 //  Common Public Functions
+    //  cloneObj
+    //  ofstAryBeginOne
+    //  aryIndexOf
+    //  randMinMax
+    //  andUpDn
+    //  randUpDnAry
+    //  verageAryNums
 
 
 var Base = (function(){
