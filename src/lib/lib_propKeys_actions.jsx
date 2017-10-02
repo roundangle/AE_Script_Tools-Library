@@ -1,12 +1,4 @@
-//  Required Libraries
-//
-//    lib_propKeys_functions.jsx
-//
-
-// Used In
-    // End Tools Only
-    // lib_propKeys_filters_Value.jsx
-    // lib_propKeys_filters_Time.jsx
+# include "lib_propKeys_functions.jsx"
 
 //  CopyPaste Public Functions
   //  propAdjst_samePropNewLyrs

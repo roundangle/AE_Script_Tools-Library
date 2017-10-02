@@ -1,3 +1,6 @@
+#include "lib_gui_simpleDialog.jsx";
+#include "lib_propKeys_actions.jsx";
+
 //  Required Libraries
 //
 //    lib_gui_simpleDialog.jsx
@@ -318,7 +321,7 @@ var FilterTime = (function(){
       bpmKeyLoop: bpmKeyLoop,
       slideKeyTime: slideKeyTime,
       randomSlideKeyTime: randomSlideKeyTime,
-      keyFltr_timeDiv:  keyFltr_timeDiv      
+      keyFltr_timeDiv:  keyFltr_timeDiv
     }
 })();
 
