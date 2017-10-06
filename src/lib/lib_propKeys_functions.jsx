@@ -25,14 +25,7 @@
 
 #include "lib_ary.jsx";
 #include "lib_math.jsx";
-
-//  Common Public Functions
-    //  cloneObj
-    //  aryIndexOf  --> Ary.indexOf
-    //  randMinMax  -->Random.minMax
-    //  randUpDn  -->Random.range
-    //  randUpDnAry -->Random.rangeAry
-    //  averageAryNums  ->MathGeneral.averageAryNums
+#include "lib_obj.jsx";
 
 
 var Base = (function(){
@@ -324,14 +317,14 @@ var Base = (function(){
                                         var posXKeyObjAry=[], posYKeyObjAry=[], posZKeyObjAry=[];
                                         for(var i = 0; i < inPropObj.keyObjAry.length; i++){
                                               var thisKeyObj = inPropObj.keyObjAry[i];
-                                              posXKeyObjAry[i] = cloneObj(thisKeyObj);
+                                              posXKeyObjAry[i] = Clone.obj(thisKeyObj);
                                               posXKeyObjAry[i].value = thisKeyObj.value[0];
                                               posXKeyObjAry[i].interp.sab = false, posXKeyObjAry[i].interp.scb = false, posXKeyObjAry[i].interp.ie = posXKeyObjAry[i].interp.ie[0], posXKeyObjAry[i].interp.oe = posXKeyObjAry[i].interp.oe[0], posXKeyObjAry[i].interp.ist = posXKeyObjAry[i].interp.ist[0], posXKeyObjAry[i].interp.ost = posXKeyObjAry[i].interp.ost[0], posXKeyObjAry[i].interp.rov = false;
-                                              posYKeyObjAry[i] = cloneObj(thisKeyObj);
+                                              posYKeyObjAry[i] = Clone.obj(thisKeyObj);
                                               posYKeyObjAry[i].value = thisKeyObj.value[1];
                                               posYKeyObjAry[i].interp.sab = false, posYKeyObjAry[i].interp.scb = false, posYKeyObjAry[i].interp.ie = posYKeyObjAry[i].interp.ie[1], posYKeyObjAry[i].interp.oe = posYKeyObjAry[i].interp.oe[1], posYKeyObjAry[i].interp.ist = posYKeyObjAry[i].interp.ist[1], posYKeyObjAry[i].interp.ost = posYKeyObjAry[i].interp.ost[1], posYKeyObjAry[i].interp.rov = false;
                                               if(threeDLyr == true){
-                                                  posZKeyObjAry[i] = cloneObj(thisKeyObj);
+                                                  posZKeyObjAry[i] = Clone.obj(thisKeyObj);
                                                   posZKeyObjAry[i].value = thisKeyObj.value[2];
                                                   posZKeyObjAry[i].interp.sab = false, posZKeyObjAry[i].interp.scb = false, posZKeyObjAry[i].interp.ie = posZKeyObjAry[i].interp.ie[2], posZKeyObjAry[i].interp.oe = posZKeyObjAry[i].interp.oe[2], posZKeyObjAry[i].interp.ist = posZKeyObjAry[i].interp.ist[2], posZKeyObjAry[i].interp.ost = posZKeyObjAry[i].interp.ost[2], posZKeyObjAry[i].interp.rov = false;
                                               }
@@ -443,17 +436,17 @@ var Base = (function(){
                                                 for(var i = 0; i < inPropObj.keyObjAry.length; i++){
                                                       var thisKeyObj = inPropObj.keyObjAry[i];
                                                       if(orderPropObjAry[0]==false){
-                                                          posXKeyObjAry[i] = cloneObj(thisKeyObj);
+                                                          posXKeyObjAry[i] = Clone.obj(thisKeyObj);
                                                           posXKeyObjAry[i].value = thisKeyObj.value[0];
                                                           posXKeyObjAry[i].interp.sab = false, posXKeyObjAry[i].interp.scb = false, posXKeyObjAry[i].interp.ist = false, posXKeyObjAry[i].interp.ost = false, posXKeyObjAry[i].interp.rov = false;
                                                       }
                                                       if(orderPropObjAry[1]==false){
-                                                          posYKeyObjAry[i] = cloneObj(thisKeyObj);
+                                                          posYKeyObjAry[i] = Clone.obj(thisKeyObj);
                                                           posYKeyObjAry[i].value = thisKeyObj.value[1];
                                                           posYKeyObjAry[i].interp.sab = false, posYKeyObjAry[i].interp.scb = false, posYKeyObjAry[i].interp.ist = false, posYKeyObjAry[i].interp.ost = false, posYKeyObjAry[i].interp.rov = false;
                                                       }
                                                       if((orderPropObjAry[1]==false)&&(threeDLyr == true)){
-                                                          posZKeyObjAry[i] = cloneObj(thisKeyObj);
+                                                          posZKeyObjAry[i] = Clone.obj(thisKeyObj);
                                                           posZKeyObjAry[i].value = thisKeyObj.value[2];
                                                           posZKeyObjAry[i].interp.sab = false, posZKeyObjAry[i].interp.scb = false, posZKeyObjAry[i].interp.ist = false, posZKeyObjAry[i].interp.ost = false, posZKeyObjAry[i].interp.rov = false;
                                                       }
@@ -1050,73 +1043,4 @@ var PropInfo = (function(){
     buildLyrProps:  buildLyrProps,
     ofstAryStartOne:  ofstAryStartOne
   };
-})();
-
-var Common = (function(){
-    function cloneObj(obj) {
-        if ((obj == null) || (typeof obj != "object")) return obj;
-        var copy = obj.constructor();
-        for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-        }
-        return copy;
-    }
-    // function ofstAryBeginOne(inAry){
-    //     var iA = 0;
-    //     var iB = inAry.length;
-    //     try{ inAry[0];}catch(err){ //assumes error is from 0 being out of range
-    //          iA++;
-    //          iB++;
-    //     };
-    //     return [iA, iB];
-    // }
-    // function Ary.indexOf(inAry, chckItem){
-    //     for(var i=0; i<inAry.length; i++){
-    //         if (inAry[i] == chckItem){
-    //           return i;
-    //         }
-    //     }
-    //     return -1;
-    // }
-    // function randMinMax(min, max, returnIntBool){
-    //     var dif = max - min;
-    //     var thisRan = Math.random();
-    //     thisRan *= dif;
-    //     thisRan += min;
-    //     if (returnIntBool == true){
-    //     thisRan = Math.floor(thisRan);
-    //     }
-    //
-    //     return thisRan;
-    // }
-    // function randUpDn(inVal){
-    //     var thisRan = Math.random();
-    //     thisRan -= .5;
-    //     thisRan *= Math.abs(inVal);
-    //
-    //     return thisRan;
-    // }
-    // function randUpDnAry(inAry){
-    //     var outAry=[];
-    //     for(var i=0; i<inAry.length; i++){
-    //         outAry[i] = randUpDn(inAry[i]);
-    //     }
-    //     return outAry;
-    // }
-    // function averageAryNums(inAry){
-    //   var outVal=0;
-    //       for(var i=0; i<inAry.length; i++){
-    //           outVal += inAry[i];
-    //       }
-    //   return outVal/inAry.length;
-    // }
-    return {    // Public Functions
-      cloneObj: cloneObj,
-      // ofstAryBeginOne:  ofstAryBeginOne//,
-      // aryIndexOf: aryIndexOf,
-      // randMinMax: randMinMax,
-      // randUpDn: randUpDn,
-      // randUpDnAry:  randUpDnAry,
-      // averageAryNums: averageAryNums
-    };
 })();

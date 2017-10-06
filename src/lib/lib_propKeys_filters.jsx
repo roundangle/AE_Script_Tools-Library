@@ -243,10 +243,10 @@ var FilterTime = (function(){
                 }
 
                 for(var j = loopLength; j < thisLyr.outPoint-loopStart; j+=loopLength){
-                    var newPropObj = cloneObj(propObjAry[0]);
+                    var newPropObj = Clone.obj(propObjAry[0]);
                     var newKeyObjAry=[];
                     for(var k = 0; k < newPropObj.keyObjAry.length; k++){
-                          var newKeyObj = cloneObj(newPropObj.keyObjAry[k]);
+                          var newKeyObj = Clone.obj(newPropObj.keyObjAry[k]);
                           newKeyObj.time += j;
                           newKeyObjAry[k] = newKeyObj;
                     }

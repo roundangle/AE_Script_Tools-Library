@@ -30,7 +30,7 @@ var CopyPaste = (function(){
         for(var i = 0; i < newLyrsAry.length; i++){   // Apply to all input layers
               var thisNewLyr = newLyrsAry[i];
               for(var j = 0; j < inKeyObjAry.length; j++){
-                  var thisObj = cloneObj(inKeyObjAry[j]);
+                  var thisObj = Clone.obj(inKeyObjAry[j]);
                   if(testConflicts(thisNewLyr, thisObj.keyObjAry[0]) == true){  // Skip unsettable props
                       var propTreeAry;
                       if((propTreeMethod == "index")||(propTreeMethod == "Index")||(propTreeMethod == "INDEX")){
