@@ -21,15 +21,18 @@
     //  readPropIndexTreeObj
     //  applyPropTreeAryToLyr
     //  buildLyrProps
+    //  ofstAryBeginOne
+
+#include "lib_ary.jsx";
+#include "lib_math.jsx";
 
 //  Common Public Functions
     //  cloneObj
-    //  ofstAryBeginOne
-    //  aryIndexOf
-    //  randMinMax
-    //  andUpDn
-    //  randUpDnAry
-    //  verageAryNums
+    //  aryIndexOf  --> Ary.indexOf
+    //  randMinMax  -->Random.minMax
+    //  randUpDn  -->Random.range
+    //  randUpDnAry -->Random.rangeAry
+    //  averageAryNums  ->MathGeneral.averageAryNums
 
 
 var Base = (function(){
@@ -100,11 +103,11 @@ var Base = (function(){
                   continue;
               }
               if (invertSkipProps == true){
-                  if ((aryIndexOf(skipProps, newProp.matchName) != -1) || (aryIndexOf(skipProps, newProp.name) != -1)){       // Either Match Name OR Name is in List   // Do Not Skip within list
+                  if ((Ary.indexOf(skipProps, newProp.matchName) != -1) || (Ary.indexOf(skipProps, newProp.name) != -1)){       // Either Match Name OR Name is in List   // Do Not Skip within list
                     subOutProps[subOutProps.length] = newProp;
                   }
               }else{
-                  if ((aryIndexOf(skipProps, newProp.matchName) == -1) && (aryIndexOf(skipProps, newProp.name) == -1)){       // Neither Match Name NOR Name is in List  // Skip within list
+                  if ((Ary.indexOf(skipProps, newProp.matchName) == -1) && (Ary.indexOf(skipProps, newProp.name) == -1)){       // Neither Match Name NOR Name is in List  // Skip within list
                     subOutProps[subOutProps.length] = newProp;
                   }
               }
@@ -258,7 +261,7 @@ var Base = (function(){
               var inPropObj = inObjAry[i];
               var inProp = inPropObj.property;
               var inLyr = readLyrFromProp(inProp);
-              var skipSepPropsIndex = aryIndexOf(skipSepProps, inProp);
+              var skipSepPropsIndex = Ary.indexOf(skipSepProps, inProp);
               var propMchNmTreeAry = readPropMatchNameTreeAry(inProp);
               var propMchNm = propMchNmTreeAry[propMchNmTreeAry.length-1];
               propWrite(inPropObj);
@@ -286,7 +289,7 @@ var Base = (function(){
         // var finishBackTo2D = false;
 
         //if (inProp instanceof Property){
-        var skipSepPropsIndex = aryIndexOf(skipSepProps, inProp);
+        var skipSepPropsIndex = Ary.indexOf(skipSepProps, inProp);
         if(-1 == skipSepPropsIndex){
             if (inProp.propertyValueType == inPropObj.keyObjAry[0].propType) {   //inPropObj.keyObjAry[i].propType
                   var propMchNmTreeAry = readPropMatchNameTreeAry(inProp);
@@ -377,7 +380,7 @@ var Base = (function(){
                                         var joinPropObjAry = [inPropObj];
                                         for(var i=0; i<folProps.length; i++){
                                             var thisFolProp = folProps[i];
-                                            var testInd = aryIndexOf(testObjAry, thisFolProp);
+                                            var testInd = Ary.indexOf(testObjAry, thisFolProp);
                                             if(testInd != -1){
                                                 skipSepProps[skipSepProps.length] = thisFolProp;
                                                 joinPropObjAry[joinPropObjAry.length] = inObjAry[iteration + testInd];
@@ -429,7 +432,7 @@ var Base = (function(){
                                             var propCnflctCat = prop_conflictsCategory(leadProp);
 
 
-                                            if (-1 != aryIndexOf(orderPropObjAry, false)){    //  One of separate is not included
+                                            if (-1 != Ary.indexOf(orderPropObjAry, false)){    //  One of separate is not included
                                                 // test if missing is Z and layer is 2D if so--skip
 
                                                 //  With All or Some Dimensions in inProp
@@ -559,7 +562,7 @@ var Base = (function(){
                                                                   }
                                                                   thisTime = testTime;
                                                                   for(var i=0; i<thisEvalTime.length; i++){       //  Calculate between multiple keyframes
-                                                                        if (-1 != aryIndexOf(lowTimeInd, i)){
+                                                                        if (-1 != Ary.indexOf(lowTimeInd, i)){
                                                                             thisVal[i] = thisEvalVal[i];
                                                                             if (keysExst[i] == true){
                                                                                 if(orderPropObjAry[i].keyObjAry.length > 1){
@@ -805,9 +808,9 @@ var MultiUse = (function(){
               case "ADBE Transform Group":
                   var thisMtchNm = inPropMtchNmTree[inPropMtchNmTree.length-1];
 
-                  if (-1 != aryIndexOf(["ADBE Position_2", "ADBE Orientation", "ADBE Rotate X", "ADBE Rotate Y"], thisMtchNm)){
+                  if (-1 != Ary.indexOf(["ADBE Position_2", "ADBE Orientation", "ADBE Rotate X", "ADBE Rotate Y"], thisMtchNm)){
                       return "Universal3dOnly";
-                  }else if(-1 != aryIndexOf(["ADBE Scale", "ADBE Opacity"], thisMtchNm)){
+                  }else if(-1 != Ary.indexOf(["ADBE Scale", "ADBE Opacity"], thisMtchNm)){
                       return "Secondary";
                   }else if (thisMtchNm == "ADBE Envir Appear in Reflect"){
                       return "RayTracedEnvir";
@@ -826,7 +829,7 @@ var MultiUse = (function(){
                   break;
               case "ADBE Material Options Group":
                   var thisMtchNm = inPropMtchNmTree[inPropMtchNmTree.length-1];
-                  if (-1 != aryIndexOf(["ADBE Casts Shadows", "ADBE Light Transmission", "ADBE Accepts Shadows", "ADBE Accepts Lights", "ADBE Ambient Coefficient", "ADBE Diffuse Coefficient", "ADBE Specular Coefficient", "ADBE Shininess Coefficient", "ADBE Metal Coefficient"], thisMtchNm)){
+                  if (-1 != Ary.indexOf(["ADBE Casts Shadows", "ADBE Light Transmission", "ADBE Accepts Shadows", "ADBE Accepts Lights", "ADBE Ambient Coefficient", "ADBE Diffuse Coefficient", "ADBE Specular Coefficient", "ADBE Shininess Coefficient", "ADBE Metal Coefficient"], thisMtchNm)){
                       return "Secondary3dOnly";
                   }else{
                       return "RayTracedOnly";
@@ -901,10 +904,10 @@ var MultiUse = (function(){
           }
 
           var lyrPropCatAry = lyr_propCategories(inLyr);
-          if (-1 == aryIndexOf(lyrPropCatAry, propCnflctCat)){
+          if (-1 == Ary.indexOf(lyrPropCatAry, propCnflctCat)){
               return false;   // Conflict found
           }
-          if ((-1 != aryIndexOf(lyrPropCatAry, "RayTracedEnvir")) && (-1 == aryIndexOf(["ADBE Envir Appear in Reflect", "ADBE Rotate Z", "ADBE Rotate X", "ADBE Opacity", "ADBE Orientation", "ADBE Rotate Y"], inKeyObj.sourceProperty.matchName))){  //
+          if ((-1 != Ary.indexOf(lyrPropCatAry, "RayTracedEnvir")) && (-1 == Ary.indexOf(["ADBE Envir Appear in Reflect", "ADBE Rotate Z", "ADBE Rotate X", "ADBE Opacity", "ADBE Orientation", "ADBE Rotate Y"], inKeyObj.sourceProperty.matchName))){  //
               return false;   //Environment Layer / Non-Environment Property
           }
           return true;  // No conflicts found
@@ -1028,6 +1031,15 @@ var PropInfo = (function(){
       }
       return outProps
   }
+  function ofstAryStartOne(inAry){    //
+      var iA = 0;
+      var iB = inAry.length;
+      try{ inAry[0];}catch(err){ //assumes error is from 0 being out of range
+           iA++;
+           iB++;
+      };
+      return [iA, iB];
+  }
   return {    // Public Functions
     readPropIndexTreeAry: readPropIndexTreeAry,
     readPropNameTreeAry:  readPropNameTreeAry,
@@ -1035,7 +1047,8 @@ var PropInfo = (function(){
     readLyrFromProp:  readLyrFromProp,
     readPropIndexTreeObj: readPropIndexTreeObj,
     applyPropTreeAryToLyr:  applyPropTreeAryToLyr,
-    buildLyrProps:  buildLyrProps
+    buildLyrProps:  buildLyrProps,
+    ofstAryStartOne:  ofstAryStartOne
   };
 })();
 
@@ -1048,62 +1061,62 @@ var Common = (function(){
         }
         return copy;
     }
-    function ofstAryBeginOne(inAry){
-        var iA = 0;
-        var iB = inAry.length;
-        try{ inAry[0];}catch(err){ //assumes error is from 0 being out of range
-             iA++;
-             iB++;
-        };
-        return [iA, iB];
-    }
-    function aryIndexOf(inAry, chckItem){
-        for(var i=0; i<inAry.length; i++){
-            if (inAry[i] == chckItem){
-              return i;
-            }
-        }
-        return -1;
-    }
-    function randMinMax(min, max, returnIntBool){
-        var dif = max - min;
-        var thisRan = Math.random();
-        thisRan *= dif;
-        thisRan += min;
-        if (returnIntBool == true){
-        thisRan = Math.floor(thisRan);
-        }
-
-        return thisRan;
-    }
-    function randUpDn(inVal){
-        var thisRan = Math.random();
-        thisRan -= .5;
-        thisRan *= Math.abs(inVal);
-
-        return thisRan;
-    }
-    function randUpDnAry(inAry){
-        var outAry=[];
-        for(var i=0; i<inAry.length; i++){
-            outAry[i] = randUpDn(inAry[i]);
-        }
-        return outAry;
-    }
-    function averageAryNums(inAry){
-      var outVal=0;
-          for(var i=0; i<inAry.length; i++){
-              outVal += inAry[i];
-          }
-      return outVal/inAry.length;
-    }
+    // function ofstAryBeginOne(inAry){
+    //     var iA = 0;
+    //     var iB = inAry.length;
+    //     try{ inAry[0];}catch(err){ //assumes error is from 0 being out of range
+    //          iA++;
+    //          iB++;
+    //     };
+    //     return [iA, iB];
+    // }
+    // function Ary.indexOf(inAry, chckItem){
+    //     for(var i=0; i<inAry.length; i++){
+    //         if (inAry[i] == chckItem){
+    //           return i;
+    //         }
+    //     }
+    //     return -1;
+    // }
+    // function randMinMax(min, max, returnIntBool){
+    //     var dif = max - min;
+    //     var thisRan = Math.random();
+    //     thisRan *= dif;
+    //     thisRan += min;
+    //     if (returnIntBool == true){
+    //     thisRan = Math.floor(thisRan);
+    //     }
+    //
+    //     return thisRan;
+    // }
+    // function randUpDn(inVal){
+    //     var thisRan = Math.random();
+    //     thisRan -= .5;
+    //     thisRan *= Math.abs(inVal);
+    //
+    //     return thisRan;
+    // }
+    // function randUpDnAry(inAry){
+    //     var outAry=[];
+    //     for(var i=0; i<inAry.length; i++){
+    //         outAry[i] = randUpDn(inAry[i]);
+    //     }
+    //     return outAry;
+    // }
+    // function averageAryNums(inAry){
+    //   var outVal=0;
+    //       for(var i=0; i<inAry.length; i++){
+    //           outVal += inAry[i];
+    //       }
+    //   return outVal/inAry.length;
+    // }
     return {    // Public Functions
       cloneObj: cloneObj,
-      ofstAryBeginOne:  ofstAryBeginOne,
-      aryIndexOf: aryIndexOf,
-      randMinMax: randMinMax,
-      randUpDn: randUpDn,
-      randUpDnAry:  randUpDnAry,
-      averageAryNums: averageAryNums
+      // ofstAryBeginOne:  ofstAryBeginOne//,
+      // aryIndexOf: aryIndexOf,
+      // randMinMax: randMinMax,
+      // randUpDn: randUpDn,
+      // randUpDnAry:  randUpDnAry,
+      // averageAryNums: averageAryNums
     };
 })();

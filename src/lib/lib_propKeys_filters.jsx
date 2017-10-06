@@ -31,7 +31,7 @@ var FilterTime = (function(){
                       var thisTime = Number(thisKeyObj.time);
                       var newTime = keyFltr_timeDiv(thisFPS, 0, rndMthd, thisTime);
 
-                      if (aryIndexOf(prevTimes, newTime) == -1){
+                      if (Ary.indexOf(prevTimes, newTime) == -1){
                           allButSkipTimes[i][j] = newTime;
                           allTimes[i][j] = newTime;
                           prevTimes[prevTimes.length] = newTime;
@@ -123,7 +123,7 @@ var FilterTime = (function(){
                           newTime = keyFltr_timeDiv(thisFPS, 0, "floor", newTime);
                       }
 
-                      if (aryIndexOf(prevTimes, newTime) == -1){
+                      if (Ary.indexOf(prevTimes, newTime) == -1){
                           allButSkipTimes[i][j] = newTime;
                           allTimes[i][j] = newTime;
                           prevTimes[prevTimes.length] = newTime;
@@ -341,7 +341,7 @@ var FilterValue = (function(){
             var propObjAry = multiPropRead(inPropsAry, slctKeysOnly, keyedPropsOnly= true);
             deleteObjKeys(propObjAry);
 
-            if (-1 == aryIndexOf(["+", "-", "*", "/", "%"], oprtr)){$.writeln("Property Math 'oprtr' does not match a valid input\t\t'+', '-', '*', '/', '%'"); return;}
+            if (-1 == Ary.indexOf(["+", "-", "*", "/", "%"], oprtr)){$.writeln("Property Math 'oprtr' does not match a valid input\t\t'+', '-', '*', '/', '%'"); return;}
 
             for(var i = 0; i < propObjAry.length; i++){
                 var thisKeyObjAry = propObjAry[i].keyObjAry;
